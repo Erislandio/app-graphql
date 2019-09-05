@@ -29,6 +29,7 @@ const schema = buildSchema(`
   type Mutation {
     createUser(user: UserInput!): User
     deleteUser(phone: String!): Boolean
+    updateUser(phone: String!, newUser: UserInput!): User!
   }
 
 `);

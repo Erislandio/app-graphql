@@ -11,9 +11,12 @@ module.exports = {
     const user = await User.findOne({ phone });
     return user;
   },
+  updateUser: async ({ phone, newUser }) => {
+    const userUpdated = await User.findOneAndUpdate({ phone, ...newUser });
+    return userUpdated;
+  },
   deleteUser: async ({ phone }) => {
     try {
-
       const userDeleted = await User.findOneAndRemove({ phone });
 
       if (userDeleted) {
