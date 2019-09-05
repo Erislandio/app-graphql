@@ -10,5 +10,19 @@ module.exports = {
   user: async ({ phone }) => {
     const user = await User.findOne({ phone });
     return user;
+  },
+  deleteUser: async ({ phone }) => {
+    try {
+
+      const userDeleted = await User.findOneAndRemove({ phone });
+
+      if (userDeleted) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      throw new Error(`error on delete user ${error}`);
+    }
   }
 };

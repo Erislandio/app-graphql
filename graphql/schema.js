@@ -3,6 +3,7 @@ const { buildSchema } = require("graphql");
 const schema = buildSchema(`
   
   type User {
+    id: String,
     name: String,
     phone: String,
     email: String,
@@ -27,6 +28,7 @@ const schema = buildSchema(`
 
   type Mutation {
     createUser(user: UserInput!): User
+    deleteUser(phone: String!): Boolean
   }
 
 `);
