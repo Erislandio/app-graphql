@@ -5,11 +5,17 @@ module.exports = {
     const newUser = await User.create({
       ...user
     });
+
+    newUser.password = '';
+
     return newUser;
   },
   user: async ({ phone }) => {
     const user = await User.findOne({ phone });
-    return user;
+    return {
+      ...user,
+      password: ""
+    };
   },
   updateUser: async ({ phone, newUser }) => {
     const userUpdated = await User.findOneAndUpdate({ phone, ...newUser });
