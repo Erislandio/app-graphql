@@ -4,14 +4,14 @@ const schema = buildSchema(`
   
   type User {
     id: String
-    name: String!
-    phone: String!
-    email: String!
-    lastname: String!
+    name: String
+    phone: String
+    email: String
+    lastname: String
     document: String
     createdAt: String
     updatedAt: String
-    password: String!
+    password: String
   }
 
   input UserInput {
@@ -29,10 +29,10 @@ const schema = buildSchema(`
   }
 
   type AuthenticationResponse {
-    status: Boolean
-    message: String
     token: String
     user: User
+    code: Int,
+    message: String
   }
 
   type Mutation {
@@ -40,7 +40,8 @@ const schema = buildSchema(`
     deleteUser(phone: String!): Boolean
     updateUser(phone: String! newUser: UserInput!): User!
     
-    authenticate(phone: String! password: String!): AuthenticationResponse
+    authenticate(email: String! password: String!): AuthenticationResponse
+    login(email: String! password: String!): AuthenticationResponse
   }
 
 `);
