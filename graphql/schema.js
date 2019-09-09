@@ -9,6 +9,7 @@ const schema = buildSchema(`
     email: String
     lastname: String
     document: String
+    rg: String
     createdAt: String
     updatedAt: String
     password: String

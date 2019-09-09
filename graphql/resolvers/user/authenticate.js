@@ -38,6 +38,8 @@ module.exports = {
     user.password = undefined;
 
     return {
+      code: 0,
+      message: 'ok',
       user,
       token: generateToken({ id: user.email })
     };
