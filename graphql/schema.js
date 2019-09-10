@@ -15,6 +15,38 @@ const schema = buildSchema(`
     password: String
   }
 
+  type Product{
+    id: String
+    name: String
+    price: Float
+    listPrice: Float
+  }
+
+  type Category {
+    id: String
+    name: String
+    description: String
+    active: Boolean
+    title: String
+    showMenu: Boolean
+  }
+
+  input CategoryInput {
+    id: String
+    name: String!
+    title: String!
+    description: String
+    active: Boolean
+    showMenu: Boolean
+  }
+
+  input ProductInput{
+    id: String
+    name: String
+    price: Float
+    listPrice: Float
+  }
+
   input UserInput {
     name: String
     phone: String
@@ -24,16 +56,17 @@ const schema = buildSchema(`
     password: String!
   }
 
-  type Query {
-    user(phone: String!) : User
-    hello: String
-  }
-
   type AuthenticationResponse {
     token: String
     user: User
-    code: Int,
+    code: Int
     message: String
+  }
+
+  type Query {
+    user(phone: String!) : User
+    categories: [Category]
+    category(name: String!): Category
   }
 
   type Mutation {
@@ -43,6 +76,14 @@ const schema = buildSchema(`
     
     authenticate(email: String! password: String!): AuthenticationResponse
     login(email: String! password: String!): AuthenticationResponse
+
+    createProduct(product: ProductInput!): Product
+    updateProduct(product: ProductInput!): Product
+    deleteProduct(id: String!): Boolean
+
+    createCategory(category: CategoryInput!): Category
+    updateCategory(category: CategoryInput!): Category
+    deleteCategory(id: String!): Boolean
   }
 
 `);
