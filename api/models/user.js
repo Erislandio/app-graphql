@@ -1,7 +1,7 @@
-const { Schema, model } = require("mongoose");
-const bcrypt = require('bcrypt')
+const mongoose= require("mongoose");
+const bcrypt = require("bcrypt");
 
-const UserSchema = new Schema(
+const UserSchema = new mongoose.Schema(
   {
     phone: {
       type: String,
@@ -38,7 +38,8 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       unique: true
-    }
+    },
+    address: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }]
   },
   {
     timestamps: true
@@ -52,4 +53,4 @@ UserSchema.pre("save", async function(next) {
   next();
 });
 
-module.exports = model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);
