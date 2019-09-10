@@ -32,9 +32,8 @@ const schema = buildSchema(`
   }
 
   input CategoryInput {
-    id: String
-    name: String!
-    title: String!
+    name: String
+    title: String
     description: String
     active: Boolean
     showMenu: Boolean
@@ -66,7 +65,7 @@ const schema = buildSchema(`
   type Query {
     user(phone: String!) : User
     categories: [Category]
-    category(name: String!): Category
+    category(id: String!): Category
   }
 
   type Mutation {
@@ -82,7 +81,7 @@ const schema = buildSchema(`
     deleteProduct(id: String!): Boolean
 
     createCategory(category: CategoryInput!): Category
-    updateCategory(category: CategoryInput!): Category
+    updateCategory(id: String!, category: CategoryInput!): Category
     deleteCategory(id: String!): Boolean
   }
 
