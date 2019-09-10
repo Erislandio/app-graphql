@@ -13,8 +13,19 @@ const schema = buildSchema(`
     createdAt: String
     updatedAt: String
     password: String
+    Address: [Address]
   }
 
+  type Address{
+    cep: String
+    name: String
+    street: String
+    city: String
+    neighborhood: String
+    locality: String
+    uf: String
+    complement: String
+  }
   type Product{
     id: String
     name: String
@@ -66,6 +77,7 @@ const schema = buildSchema(`
     user(phone: String!) : User
     categories: [Category]
     category(id: String!): Category
+    address(id: String): Address
   }
 
   type Mutation {
@@ -83,6 +95,8 @@ const schema = buildSchema(`
     createCategory(category: CategoryInput!): Category
     updateCategory(id: String!, category: CategoryInput!): Category
     deleteCategory(id: String!): Boolean
+
+    createAddress(cep: String, complement: String, userId: String): Address
   }
 
 `);
