@@ -25,7 +25,6 @@ const AddressSchema = mongoose.Schema({
   complement: {
     type: String
   },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
 module.exports = mongoose.model("Address", AddressSchema);

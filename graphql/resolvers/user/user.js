@@ -10,6 +10,11 @@ module.exports = {
 
     return newUser;
   },
+  users: async () => {
+    const users = await User.find();
+
+    return users;
+  },
   user: async ({ id }) => {
     const user = await User.findById({ _id: id });
     return {
@@ -19,6 +24,7 @@ module.exports = {
   },
   updateUser: async ({ phone, newUser }) => {
     const userUpdated = await User.findOneAndUpdate({ phone, ...newUser });
+    await userUpdated.save()
     return userUpdated;
   },
   deleteUser: async ({ phone }) => {

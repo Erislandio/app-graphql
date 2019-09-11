@@ -75,13 +75,6 @@ const schema = buildSchema(`
     message: String
   }
 
-  type Query {
-    user(id: String!) : User
-    categories: [Category]
-    category(id: String!): Category
-    address(id: String): Address
-  }
-
   type AddressResponse {
     cep: String
     name: String
@@ -125,6 +118,14 @@ const schema = buildSchema(`
     deleteCategory(id: String!): Boolean
 
     createAddress(id: String!, address: AddressInput!): AddressResponse
+  }
+
+  type Query {
+    user(id: String!) : User
+    categories: [Category]
+    category(id: String!): Category
+    address(id: String): Address
+    users: [User]
   }
 
 `);

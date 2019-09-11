@@ -3,7 +3,7 @@ const Address = require("../../../api/models/address");
 
 module.exports = {
   createAddress: async ({ id, address }) => {
-    let user = await User.findById(id);
+    const user = await User.findById(id);
 
     if (!user) {
       return {
@@ -12,21 +12,29 @@ module.exports = {
       };
     }
 
-    const newAddress = await Address.create({ ...address, user });
+    const newAddress = await Address.create({
+      ...address
+    });
 
-    user = await User.findByIdAndUpdate(id, {
+    const updateAddress = await User.findByIdAndUpdate(id, {
       $push: {
-        address: address
+        address: newAddress
       }
     });
 
-    const addressFind = await Address.find({ _id: { $in: user.address } });
+    await updateAddress.save()
 
     return {
-      address: addressFind,
-      user: newAddress,
+      cep: newAddress.cep,
+      name: newAddress.name,
+      street: newAddress.street,
+      city: newAddress.city,
+      neighborhood: newAddress.neighborhood,
+      locality: newAddress.locality,
+      uf: newAddress.uf,
       message: "ok",
-      error: false
+      error: false,
+      user: updateAddress
     };
   }
 };
