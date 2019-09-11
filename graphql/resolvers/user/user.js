@@ -6,12 +6,12 @@ module.exports = {
       ...user
     });
 
-    newUser.password = '';
+    newUser.password = "";
 
     return newUser;
   },
-  user: async ({ phone }) => {
-    const user = await User.findOne({ phone });
+  user: async ({ id }) => {
+    const user = await User.findById({ _id: id });
     return {
       ...user,
       password: ""

@@ -24,7 +24,8 @@ const schema = buildSchema(`
     neighborhood: String
     locality: String
     uf: String
-    complement: String
+    complement: String,
+    user: String
   }
   type Product{
     id: String
@@ -58,12 +59,13 @@ const schema = buildSchema(`
   }
 
   input UserInput {
-    name: String
+    name: String!
     phone: String
     email: String
     lastname: String
-    document: String
+    document: String!
     password: String!
+    rg: String
   }
 
   type AuthenticationResponse {
@@ -74,10 +76,36 @@ const schema = buildSchema(`
   }
 
   type Query {
-    user(phone: String!) : User
+    user(id: String!) : User
     categories: [Category]
     category(id: String!): Category
     address(id: String): Address
+  }
+
+  type AddressResponse {
+    cep: String
+    name: String
+    street: String
+    city: String
+    neighborhood: String
+    locality: String
+    uf: String
+    complement: String,
+    user: User
+    message: String
+    error: Boolean
+  }
+
+
+  input AddressInput {
+    cep: String
+    name: String
+    street: String
+    city: String
+    neighborhood: String
+    locality: String
+    uf: String
+    complement: String,
   }
 
   type Mutation {
@@ -96,7 +124,7 @@ const schema = buildSchema(`
     updateCategory(id: String!, category: CategoryInput!): Category
     deleteCategory(id: String!): Boolean
 
-    createAddress(cep: String, complement: String, userId: String): Address
+    createAddress(id: String!, address: AddressInput!): AddressResponse
   }
 
 `);

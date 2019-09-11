@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
-const AddressSchema = Schema({
+const AddressSchema = mongoose.Schema({
   cep: {
     type: String
   },
@@ -24,7 +24,8 @@ const AddressSchema = Schema({
   },
   complement: {
     type: String
-  }
+  },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
-module.exports = model("Address", AddressSchema);
+module.exports = mongoose.model("Address", AddressSchema);
