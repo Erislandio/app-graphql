@@ -1,8 +1,11 @@
-const mongoose= require("mongoose");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema(
   {
+    id: {
+      type: String
+    },
     phone: {
       type: String,
       unique: true
@@ -39,12 +42,46 @@ const UserSchema = new mongoose.Schema(
       required: false,
       unique: true
     },
-    address: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }]
+    address: [
+      {
+        cep: {
+          type: String
+        },
+        name: {
+          type: String
+        },
+        street: {
+          type: String
+        },
+        city: {
+          type: String
+        },
+        neighborhood: {
+          type: String
+        },
+        locality: {
+          type: String
+        },
+        uf: {
+          type: String
+        },
+        complement: {
+          type: String
+        }
+      }
+    ]
   },
   {
     timestamps: true
   }
 );
+
+UserSchema.virtual("Address", {
+  ref: "Item",
+  localField: "_id",
+  foreignField: "_id",
+  justOne: false
+});
 
 UserSchema.pre("save", async function(next) {
   const hash = await bcrypt.hash(this.password, 10);

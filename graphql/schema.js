@@ -24,8 +24,7 @@ const schema = buildSchema(`
     neighborhood: String
     locality: String
     uf: String
-    complement: String,
-    user: String
+    complement: String
   }
   type Product{
     id: String
@@ -76,14 +75,7 @@ const schema = buildSchema(`
   }
 
   type AddressResponse {
-    cep: String
-    name: String
-    street: String
-    city: String
-    neighborhood: String
-    locality: String
-    uf: String
-    complement: String,
+    address: Address
     user: User
     message: String
     error: Boolean
@@ -126,6 +118,7 @@ const schema = buildSchema(`
     category(id: String!): Category
     address(id: String): Address
     users: [User]
+    allAddress(id: String!): [Address]
   }
 
 `);

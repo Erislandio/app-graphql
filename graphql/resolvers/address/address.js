@@ -1,40 +1,46 @@
 const User = require("../../../api/models/user");
-const Address = require("../../../api/models/address");
 
 module.exports = {
   createAddress: async ({ id, address }) => {
-    const user = await User.findById(id);
+    try {
+      const user = await User.findById(id);
 
-    if (!user) {
+      if (!user) {
+        return {
+          error: true,
+          message: "User not found!"
+        };
+      }
+
+      const newAddress = await new Address({ ...address });
+
+      await user.address.push(newAddress);
+      await user.save();
+
+      return {
+        address: { ...address },
+        user,
+        message: "ok",
+        error: false
+      };
+    } catch (error) {
       return {
         error: true,
-        message: "User not found!"
+        message: error
       };
     }
+  },
+  allAddress: async ({ id }) => {
+    try {
+      const allAddress = await User.find(id);
+      console.log(allAddress);
 
-    const newAddress = await Address.create({
-      ...address
-    });
-
-    const updateAddress = await User.findByIdAndUpdate(id, {
-      $push: {
-        address: newAddress
-      }
-    });
-
-    await updateAddress.save()
-
-    return {
-      cep: newAddress.cep,
-      name: newAddress.name,
-      street: newAddress.street,
-      city: newAddress.city,
-      neighborhood: newAddress.neighborhood,
-      locality: newAddress.locality,
-      uf: newAddress.uf,
-      message: "ok",
-      error: false,
-      user: updateAddress
-    };
+      return null;
+    } catch (error) {
+      return {
+        error: true,
+        message: error
+      };
+    }
   }
 };

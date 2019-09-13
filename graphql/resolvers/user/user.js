@@ -1,4 +1,5 @@
 const User = require("../../../api/models/user");
+const Address = require("../../../api/models/address");
 
 module.exports = {
   createUser: async ({ user }) => {
@@ -17,14 +18,18 @@ module.exports = {
   },
   user: async ({ id }) => {
     const user = await User.findById({ _id: id });
+
+    const address = await Address.findOne({ user: id });
+
     return {
       ...user,
-      password: ""
+      password: "",
+      Address: address
     };
   },
   updateUser: async ({ phone, newUser }) => {
     const userUpdated = await User.findOneAndUpdate({ phone, ...newUser });
-    await userUpdated.save()
+    await userUpdated.save();
     return userUpdated;
   },
   deleteUser: async ({ phone }) => {
