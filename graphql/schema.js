@@ -17,6 +17,7 @@ const schema = buildSchema(`
   }
 
   type Address{
+    _id: String
     cep: String
     name: String
     street: String
@@ -116,7 +117,7 @@ const schema = buildSchema(`
     user(id: String!) : User
     categories: [Category]
     category(id: String!): Category
-    address(id: String): Address
+    address(userId: String, id: String): Address
     users: [User]
     allAddress(id: String!): [Address]
   }

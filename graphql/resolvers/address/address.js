@@ -43,5 +43,23 @@ module.exports = {
         message: error
       };
     }
+  },
+  address: async ({ userId, id }) => {
+    console.log("teste");
+    try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return null;
+      }
+
+      const findAddress = user.address.find(ad => {
+        return ad._id == id;
+      });
+
+      return findAddress;
+    } catch (error) {
+      return null;
+    }
   }
 };
