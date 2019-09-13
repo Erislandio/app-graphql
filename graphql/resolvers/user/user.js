@@ -13,19 +13,27 @@ module.exports = {
   },
   users: async () => {
     const users = await User.find();
-
+    console.log(users.address);
     return users;
   },
   user: async ({ id }) => {
-    const user = await User.findById({ _id: id });
+    try {
+      const user = await User.findById({ _id: id });
 
-    const address = await Address.findOne({ user: id });
-
-    return {
-      ...user,
-      password: "",
-      Address: address
-    };
+      return {
+        _id: user._id,
+        name: user.name,
+        phone: user.phone,
+        email: user.email,
+        lastname: user.lastname,
+        document: user.document,
+        password: null,
+        rg: user.rg,
+        address: user.address
+      };
+    } catch (error) {
+      return null;
+    }
   },
   updateUser: async ({ phone, newUser }) => {
     const userUpdated = await User.findOneAndUpdate({ phone, ...newUser });

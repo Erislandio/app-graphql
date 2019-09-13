@@ -3,7 +3,7 @@ const { buildSchema } = require("graphql");
 const schema = buildSchema(`
   
   type User {
-    id: String
+    _id: String
     name: String
     phone: String
     email: String
@@ -13,7 +13,7 @@ const schema = buildSchema(`
     createdAt: String
     updatedAt: String
     password: String
-    Address: [Address]
+    address: [Address]
   }
 
   type Address{

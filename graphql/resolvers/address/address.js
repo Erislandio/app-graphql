@@ -1,4 +1,5 @@
 const User = require("../../../api/models/user");
+const Address = require("../../../api/models/address");
 
 module.exports = {
   createAddress: async ({ id, address }) => {
