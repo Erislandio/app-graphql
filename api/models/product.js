@@ -6,11 +6,27 @@ const productSchema = new Schema({
   },
   name: { type: String, unique: true, auto: true },
   price: {
-    type: Float64Array
+    type: Number
   },
   listPrice: {
-    type: Float64Array
-  }
+    type: Number
+  },
+  description: {
+    type: String
+  },
+  brand: {
+    type: String
+  },
+  images: [
+    {
+      filename: {
+        type: String
+      },
+      size: {
+        type: Number
+      }
+    }
+  ]
 });
 
 module.exports = model("Product", productSchema);

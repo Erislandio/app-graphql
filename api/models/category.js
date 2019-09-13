@@ -18,7 +18,34 @@ const categorySchema = new Schema({
   },
   showMenu: {
     type: Boolean
-  }
+  },
+  products: [
+    {
+      name: { type: String, unique: true },
+      price: {
+        type: Number
+      },
+      listPrice: {
+        type: Number
+      },
+      description: {
+        type: String
+      },
+      brand: {
+        type: String
+      },
+      images: [
+        {
+          filename: {
+            type: String
+          },
+          size: {
+            type: Number
+          }
+        }
+      ]
+    }
+  ]
 });
 
 module.exports = model("category", categorySchema);

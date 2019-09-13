@@ -27,12 +27,6 @@ const schema = buildSchema(`
     uf: String
     complement: String
   }
-  type Product{
-    id: String
-    name: String
-    price: Float
-    listPrice: Float
-  }
 
   type Category {
     id: String
@@ -41,6 +35,7 @@ const schema = buildSchema(`
     active: Boolean
     title: String
     showMenu: Boolean
+    products: [Product]
   }
 
   input CategoryInput {
@@ -52,8 +47,10 @@ const schema = buildSchema(`
   }
 
   input ProductInput{
-    id: String
+    _id: String
     name: String
+    description: String
+    brand: String
     price: Float
     listPrice: Float
   }
@@ -82,7 +79,6 @@ const schema = buildSchema(`
     error: Boolean
   }
 
-
   input AddressInput {
     cep: String
     name: String
@@ -91,7 +87,16 @@ const schema = buildSchema(`
     neighborhood: String
     locality: String
     uf: String
-    complement: String,
+    complement: String
+  }
+
+  type Product {
+    _id: String
+    name: String
+    description: String
+    brand: String
+    price: Float
+    listPrice: Float
   }
 
   type Mutation {
@@ -102,22 +107,23 @@ const schema = buildSchema(`
     authenticate(email: String! password: String!): AuthenticationResponse
     login(email: String! password: String!): AuthenticationResponse
 
-    createProduct(product: ProductInput!): Product
-    updateProduct(product: ProductInput!): Product
-    deleteProduct(id: String!): Boolean
-
     createCategory(category: CategoryInput!): Category
-    updateCategory(id: String!, category: CategoryInput!): Category
+    updateCategory(id: String! category: CategoryInput!): Category
     deleteCategory(id: String!): Boolean
 
-    createAddress(id: String!, address: AddressInput!): AddressResponse
+    createAddress(id: String! address: AddressInput!): AddressResponse
+
+    createProduct(id: String!, product: ProductInput!): Product
+    updateProduct(id: ProductInput!, product: ProductInput!): Product
+    deleteProduct(id: String!): Boolean!
+
   }
 
   type Query {
     user(id: String!) : User
     categories: [Category]
     category(id: String!): Category
-    address(userId: String, id: String): Address
+    address(userId: String id: String): Address
     users: [User]
     allAddress(id: String!): [Address]
   }
