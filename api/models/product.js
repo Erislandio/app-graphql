@@ -12,3 +12,5 @@ const productSchema = new Schema({
     type: Float64Array
   }
 });
+
+module.exports = model("Product", productSchema);
