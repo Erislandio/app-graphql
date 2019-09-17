@@ -1,0 +1,26 @@
+mutation createCategory($id: String!, $category: CategoryInput!) {
+  createCategory(id: $id, category: $category) {
+    id
+    name
+    description
+    active
+    title
+    showMenu
+    products {
+      _id
+      name
+      description
+      brand
+      price
+      listPrice
+    }
+    departament {
+      _id
+      name
+      title
+      description
+      active
+      showMenu
+    }
+  }
+}

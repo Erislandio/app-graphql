@@ -1,4 +1,6 @@
 const Category = require("../../../api/models/category");
+const Dep = require("../../../api/models/departament");
+const mongoose = require("mongoose");
 
 module.exports = {
   categories: async () => {
@@ -9,10 +11,22 @@ module.exports = {
     const category = Category.findById({ _id: id });
     return category;
   },
-  createCategory: async ({ category }) => {
-    const newCategory = await Category.create({
-      ...category
+  createCategory: async ({ id, category }) => {
+    const dep = await Dep.findById(id);
+
+    if (!dep) {
+      return null;
+    }
+
+    const newCategory = new Category({
+      ...category,
+      _id: mongoose.Types.ObjectId(),
+      departament: dep
     });
+
+    await newCategory.save();
+    await dep.categories.push(newCategory);
+    await dep.save();
 
     return newCategory;
   },

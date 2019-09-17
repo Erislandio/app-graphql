@@ -36,6 +36,7 @@ const schema = buildSchema(`
     title: String
     showMenu: Boolean
     products: [Product]
+    departament: Departament
   }
 
   input CategoryInput {
@@ -47,6 +48,7 @@ const schema = buildSchema(`
   }
 
   type Departament {
+    _id: String
     name: String
     title: String
     description: String
@@ -138,8 +140,8 @@ const schema = buildSchema(`
     authenticate(email: String! password: String!): AuthenticationResponse
     login(email: String! password: String!): AuthenticationResponse
 
-    createCategory(category: CategoryInput!): Category
-    updateCategory(id: String! category: CategoryInput!): Category
+    createCategory(id: String!, category: CategoryInput!): Category
+    updateCategory(id: String!, category: CategoryInput!): Category
     deleteCategory(id: String!): Boolean
 
     createAddress(id: String! address: AddressInput!): AddressResponse
