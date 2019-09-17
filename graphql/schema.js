@@ -92,17 +92,13 @@ const schema = buildSchema(`
   }
 
   input FileInput {
-    name: String!
-    type: String!
-    size: Int!
-    path: String!
+    filename: String
+    path: String
   }
   
   type File {
-    name: String!
-    type: String!
-    size: Int!
-    path: String!
+    filename: String
+    path: String
   }
 
   type AddressResponse {
@@ -129,7 +125,8 @@ const schema = buildSchema(`
     description: String
     brand: String
     price: Float
-    listPrice: Float
+    listPrice: Float,
+    images: [File]
   }
 
   type Mutation {

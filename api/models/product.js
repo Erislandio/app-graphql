@@ -23,8 +23,8 @@ const productSchema = new Schema({
       filename: {
         type: String
       },
-      size: {
-        type: Number
+      path: {
+        type: String
       }
     }
   ],
