@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const {Schema, model} = mongoose
 
 const categorySchema = new Schema({
   name: {
@@ -20,31 +21,10 @@ const categorySchema = new Schema({
     type: Boolean
   },
   products: [
-    {
-      name: { type: String, unique: true },
-      price: {
-        type: Number
-      },
-      listPrice: {
-        type: Number
-      },
-      description: {
-        type: String
-      },
-      brand: {
-        type: String
-      },
-      images: [
-        {
-          filename: {
-            type: String
-          },
-          size: {
-            type: Number
-          }
-        }
-      ]
-    }
+   {
+     type: mongoose.Types.ObjectId,
+     ref: 'Product'
+   }
   ]
 });
 
