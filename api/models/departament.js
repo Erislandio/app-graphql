@@ -4,7 +4,8 @@ const categorySchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    lowercase: true
   },
   title: {
     type: String,

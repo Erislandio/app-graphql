@@ -1,0 +1,29 @@
+mutation createAddress($id: String!, $address: AddressInput!) {
+  createAddress(id: $id, address: $address) {
+    address {
+      _id
+      cep
+      name
+      street
+      city
+      neighborhood
+      locality
+      uf
+      complement
+    }
+    user {
+      _id
+      name
+      phone
+      email
+      lastname
+      document
+      rg
+      createdAt
+      updatedAt
+      password
+    }
+    message
+    error
+  }
+}

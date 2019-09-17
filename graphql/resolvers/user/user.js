@@ -13,7 +13,6 @@ module.exports = {
   },
   users: async () => {
     const users = await User.find();
-    console.log(users.address);
     return users;
   },
   user: async ({ id }) => {

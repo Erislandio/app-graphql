@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
-const {Schema, model} = mongoose
+const { Schema, model } = mongoose;
 
 const categorySchema = new Schema({
   name: {
     type: String,
     required: true,
+    lowercase: true,
     unique: true
   },
   title: {
@@ -21,10 +22,10 @@ const categorySchema = new Schema({
     type: Boolean
   },
   products: [
-   {
-     type: mongoose.Types.ObjectId,
-     ref: 'Product'
-   }
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Product"
+    }
   ]
 });
 

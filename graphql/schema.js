@@ -46,6 +46,23 @@ const schema = buildSchema(`
     showMenu: Boolean
   }
 
+  type Departament {
+    name: String
+    title: String
+    description: String
+    active: Boolean
+    showMenu: Boolean,
+    categories: [Category]
+  }
+
+  input DepartamentInput {
+    name: String
+    title: String
+    description: String
+    active: Boolean
+    showMenu: Boolean
+  }
+
   input ProductInput{
     _id: String
     name: String
@@ -133,7 +150,11 @@ const schema = buildSchema(`
 
     uploadProductImage(file: FileInput): File
 
-  }
+    createDepartament(departament: DepartamentInput!): Departament
+    updateDepartament(id: String!, departament: DepartamentInput!): Departament
+    deleteDepartament(id: String!): Boolean
+
+  } 
 
   type Query {
     user(id: String!) : User

@@ -1,11 +1,11 @@
 const User = require("../../../api/models/user");
 const Address = require("../../../api/models/address");
-const { Types } = require("mongoose");
+const mongoose = require("mongoose");
 
 module.exports = {
   createAddress: async ({ id, address }) => {
     try {
-      const user = await User.findById(id);
+      const user = await User.findById(id).select("-password");
 
       if (!user) {
         return {
@@ -16,12 +16,12 @@ module.exports = {
 
       const newAddress = await new Address({
         ...address,
-        id: Types.ObjectId(),
-        user
+        _id: mongoose.Types.ObjectId(),
+        user: user
       });
 
+      await newAddress.save();
       await user.address.push(newAddress);
-      await user.save();
 
       return {
         address: { ...address },

@@ -1,0 +1,25 @@
+mutation createUser($user: UserInput!){
+  createUser(user: $user){
+    _id
+    name
+    phone
+    email
+    lastname
+    document
+    rg
+    password
+    createdAt
+    updatedAt
+    address {
+      _id
+      cep
+      name
+      street
+      city
+      neighborhood
+      locality
+      uf
+      complement
+    }
+  }
+}
