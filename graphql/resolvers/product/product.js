@@ -1,4 +1,5 @@
 const Product = require("../../../api/models/product");
+const mongoose = require("mongoose");
 const Category = require("../../../api/models/category");
 
 module.exports = {
@@ -10,14 +11,22 @@ module.exports = {
         return new Error("Category not found!");
       }
 
-      const newProduct = await new Product({ ...product });
+      const newProduct = await new Product({
+        ...product,
+        _id: mongoose.Types.ObjectId(),
+        category: parentCat
+      });
+      await newProduct.save();
 
       await parentCat.products.push(newProduct);
       await parentCat.save();
 
       return newProduct;
     } catch (error) {
-      return null;
+      return error;
     }
+  },
+  uploadProductImage: async ({ file }) => {
+    console.log(file);
   }
 };

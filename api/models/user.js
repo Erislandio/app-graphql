@@ -44,30 +44,8 @@ const UserSchema = new mongoose.Schema(
     },
     address: [
       {
-        cep: {
-          type: String
-        },
-        name: {
-          type: String
-        },
-        street: {
-          type: String
-        },
-        city: {
-          type: String
-        },
-        neighborhood: {
-          type: String
-        },
-        locality: {
-          type: String
-        },
-        uf: {
-          type: String
-        },
-        complement: {
-          type: String
-        }
+        type: mongoose.Types.ObjectId,
+        ref: "Address"
       }
     ]
   },

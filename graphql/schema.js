@@ -72,6 +72,20 @@ const schema = buildSchema(`
     message: String
   }
 
+  input FileInput {
+    name: String!
+    type: String!
+    size: Int!
+    path: String!
+  }
+  
+  type File {
+    name: String!
+    type: String!
+    size: Int!
+    path: String!
+  }
+
   type AddressResponse {
     address: Address
     user: User
@@ -116,6 +130,8 @@ const schema = buildSchema(`
     createProduct(id: String!, product: ProductInput!): Product
     updateProduct(id: ProductInput!, product: ProductInput!): Product
     deleteProduct(id: String!): Boolean!
+
+    uploadProductImage(file: FileInput): File
 
   }
 

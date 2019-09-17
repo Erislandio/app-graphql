@@ -1,5 +1,6 @@
 const User = require("../../../api/models/user");
 const Address = require("../../../api/models/address");
+const { Types } = require("mongoose");
 
 module.exports = {
   createAddress: async ({ id, address }) => {
@@ -13,7 +14,11 @@ module.exports = {
         };
       }
 
-      const newAddress = await new Address({ ...address });
+      const newAddress = await new Address({
+        ...address,
+        id: Types.ObjectId(),
+        user
+      });
 
       await user.address.push(newAddress);
       await user.save();

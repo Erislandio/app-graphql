@@ -5,7 +5,8 @@ const AddressSchema = mongoose.Schema({
     type: String
   },
   name: {
-    type: String
+    type: String,
+    unique: true
   },
   street: {
     type: String
@@ -25,6 +26,10 @@ const AddressSchema = mongoose.Schema({
   complement: {
     type: String
   },
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 module.exports = mongoose.model("Address", AddressSchema);
