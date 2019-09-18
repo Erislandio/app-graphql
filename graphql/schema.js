@@ -164,6 +164,7 @@ const schema = buildSchema(`
     users: [User]
     allAddress(id: String!): [Address]
     departaments: [Departament] 
+    departament(id: String!): Departament
   }
 
 `);

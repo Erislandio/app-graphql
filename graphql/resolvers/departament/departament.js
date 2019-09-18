@@ -52,5 +52,14 @@ module.exports = {
     } catch (error) {
       return error;
     }
+  },
+  departament: async ({ id }) => {
+    try {
+      const dep = Dep.findById(id);
+
+      return dep;
+    } catch (error) {
+      return error;
+    }
   }
 };
