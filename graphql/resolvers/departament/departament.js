@@ -40,6 +40,8 @@ module.exports = {
         ...departament
       });
 
+      await dep.save();
+
       return departament;
     } catch (error) {
       return error;
