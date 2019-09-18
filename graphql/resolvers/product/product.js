@@ -28,5 +28,30 @@ module.exports = {
   },
   uploadProductImage: async ({ file }) => {
     console.log(file);
+  },
+  upload: async ({ photo }) => {
+    const { filename, createReadStream } = await photo;
+
+    try {
+      const result = await new Promise((resolve, reject) => {
+        createReadStream().pipe(
+          cloudinary.uploader.upload_stream((error, result) => {
+            if (error) {
+              reject(error);
+            }
+
+            resolve(result);
+          })
+        );
+      });
+
+      const newPhoto = { filename, path: result.secure_url };
+
+      photos.push(newPhoto);
+
+      return newPhoto;
+    } catch (err) {
+      console.log(err);
+    }
   }
 };

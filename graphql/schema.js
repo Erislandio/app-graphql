@@ -72,6 +72,7 @@ const schema = buildSchema(`
     brand: String
     price: Float
     listPrice: Float
+    images: [File]    
   }
 
   input UserInput {
@@ -152,6 +153,8 @@ const schema = buildSchema(`
     createDepartament(departament: DepartamentInput!): Departament
     updateDepartament(id: String!, departament: DepartamentInput!): Departament
     deleteDepartament(id: String!): Boolean
+
+    upload(photo: Upload!): File!
 
   } 
 

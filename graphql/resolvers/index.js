@@ -5,11 +5,22 @@ const Address = require("./address/address");
 const Product = require("./product/product");
 const Dep = require("./departament/departament");
 
+const resolvers = {
+  Query:{
+    User,
+    Address,
+    Product,
+    Dep
+  },
+  Mutation: {
+    User,
+    Categories,
+    Address,
+    Product,
+    Dep
+  }
+}
+
 module.exports = {
-  ...User,
-  ...Authenticate,
-  ...Categories,
-  ...Address,
-  ...Product,
-  ...Dep
+resolvers
 };
