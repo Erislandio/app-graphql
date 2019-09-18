@@ -53,5 +53,14 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+  },
+  products: async ({ id }) => {
+    try {
+      const category = await Category.findById(id);
+
+      return category.products;
+    } catch (error) {
+      return error;
+    }
   }
 };

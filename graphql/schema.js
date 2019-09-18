@@ -165,6 +165,7 @@ const schema = buildSchema(`
     allAddress(id: String!): [Address]
     departaments: [Departament] 
     departament(id: String!): Departament
+    products(id: String): [Product]
   }
 
 `);

@@ -4,12 +4,23 @@ const mongoose = require("mongoose");
 
 module.exports = {
   categories: async () => {
-    const categories = Category.find();
+    const categories = await Category.find()
     return categories;
   },
   category: async ({ id }) => {
-    const category = Category.findById({ _id: id });
-    return category;
+    const category = await Category.findById(id)
+    const dep = await Dep.findById(category.departament)
+    
+    return {
+      id: category._id,
+      name: category.name,
+      description: category.description,
+      active: category.active,
+      title: category.title,
+      showMenu: category.showMenu,
+      products: category.products,
+      departament: dep      
+    };
   },
   createCategory: async ({ id, category }) => {
     const dep = await Dep.findById(id);
