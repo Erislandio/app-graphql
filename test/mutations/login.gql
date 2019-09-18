@@ -17,3 +17,23 @@ login(email: $email, password: $password){
    message
 }
 }
+
+mutation {
+  login(email: "admin@gmail.com", password: "1234"){
+    token
+    code
+    message
+    user {
+      _id
+      name
+      phone
+      email
+      lastname
+      document
+      rg
+      createdAt
+      updatedAt
+      password
+    }
+  }
+}
