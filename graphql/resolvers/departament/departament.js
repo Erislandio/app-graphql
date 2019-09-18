@@ -44,5 +44,13 @@ module.exports = {
     } catch (error) {
       return error;
     }
+  },
+  departaments: async () => {
+    try {
+      const dep = await Dep.find();
+      return dep;
+    } catch (error) {
+      return error;
+    }
   }
 };
