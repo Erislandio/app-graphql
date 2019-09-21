@@ -3,8 +3,10 @@ const graphqlHTTP = require("express-graphql");
 const schema = require("./graphql/schema");
 const root = require("./graphql/resolvers/index");
 require("./api/db/index");
+const CORS = require('cors')
 
 const app = express();
+app.use(CORS())
 app.use(
   "/graphql",
   graphqlHTTP({
